@@ -20,6 +20,7 @@
 		8386D6061D52C73200C7B98F /* CDH_PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8386D6051D52C73200C7B98F /* CDH_PhotoBrowserController.swift */; };
 		8386D6081D52C78300C7B98F /* CDH_PhotoBrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8386D6071D52C78300C7B98F /* CDH_PhotoBrowserLayout.swift */; };
 		8386D60A1D52D51B00C7B98F /* CDH_PhotoBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8386D6091D52D51B00C7B98F /* CDH_PhotoBrowserCell.swift */; };
+		8386D6631D54D18900C7B98F /* CDH_PhotoBrowserAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8386D6621D54D18900C7B98F /* CDH_PhotoBrowserAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8386D6051D52C73200C7B98F /* CDH_PhotoBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDH_PhotoBrowserController.swift; sourceTree = "<group>"; };
 		8386D6071D52C78300C7B98F /* CDH_PhotoBrowserLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDH_PhotoBrowserLayout.swift; sourceTree = "<group>"; };
 		8386D6091D52D51B00C7B98F /* CDH_PhotoBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDH_PhotoBrowserCell.swift; sourceTree = "<group>"; };
+		8386D6621D54D18900C7B98F /* CDH_PhotoBrowserAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDH_PhotoBrowserAnimator.swift; sourceTree = "<group>"; };
 		B127A3EE6D5A055053AF4071 /* Pods-PhotoBrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoBrowser/Pods-PhotoBrowser.debug.xcconfig"; sourceTree = "<group>"; };
 		C27D33DF29D7A56840B071DD /* Pods-PhotoBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoBrowser/Pods-PhotoBrowser.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				8386D6051D52C73200C7B98F /* CDH_PhotoBrowserController.swift */,
+				8386D6621D54D18900C7B98F /* CDH_PhotoBrowserAnimator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			files = (
 				8386D5D91D522CB100C7B98F /* AppDelegate.swift in Sources */,
 				8386D6081D52C78300C7B98F /* CDH_PhotoBrowserLayout.swift in Sources */,
+				8386D6631D54D18900C7B98F /* CDH_PhotoBrowserAnimator.swift in Sources */,
 				8386D5FD1D5262F400C7B98F /* CDH_HomeCollectionViewLayout.swift in Sources */,
 				8386D6011D52654F00C7B98F /* CDH_HomeCollectionViewCell.swift in Sources */,
 				8386D6061D52C73200C7B98F /* CDH_PhotoBrowserController.swift in Sources */,

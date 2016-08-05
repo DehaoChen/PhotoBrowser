@@ -13,6 +13,8 @@ private let reuseIdentifier = "CDH_HomeCollectionViewCell"
 class CDH_HomeViewController: UICollectionViewController {
 
     // Mark:- 定义属性
+    var isPresented : Bool = false
+    lazy var photoBrowserAnimator : CDH_PhotoBrowserAnimator = CDH_PhotoBrowserAnimator()
     lazy var shops : [CDH_ShopItem] = [CDH_ShopItem]()
     
     
@@ -57,6 +59,7 @@ extension CDH_HomeViewController{
     }
 }
 
+// MARK : - collectionView 的数据源和代理方法
 extension CDH_HomeViewController{
     // MARK: - UICollectionViewDataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -92,15 +95,37 @@ extension CDH_HomeViewController{
         photoBrowser.shops = shops
         photoBrowser.indexPath = indexPath
         
-        // 设置 photoBrowser 的弹出动画 
+        // 设置 photoBrowser 控制器的弹出动画
         // 系统提供的枚举值类型设置弹出动画效果
-//        photoBrowser.modalTransitionStyle = .CoverVertical
-        photoBrowser.modalTransitionStyle = .CrossDissolve
+        // photoBrowser.modalTransitionStyle = .CoverVertical
+        // photoBrowser.modalTransitionStyle = .CrossDissolve
+        // photoBrowser.modalTransitionStyle = .FlipHorizontal
+        // photoBrowser.modalTransitionStyle = .PartialCurl
+    /**
+    public enum UIModalTransitionStyle : Int {
         
-        // 3.弹出控制器
+        case CoverVertical  // 直接从底部 modal 出来, 默认的一样
+        case FlipHorizontal // 翻转动画
+        case CrossDissolve  // 淡入淡出
+        @available(iOS 3.2, *)
+        case PartialCurl    // 向上翻书的效果
+    }
+    */
+        // 3.设置photoBrowser的弹出动画
+        // 需求, 渐变弹出动画化效果, 并且可以看到原来的控制器 View 上的内容
+        // 系统默认移除 modal 之前的控制器的 view 才 modal 出新的控制器的 view
+        // 所以我们必须在这里设置为自定义转场动画, 保留原来控制器 View 的视图在窗口中不被移除
+        // 并给转场动画设置代理, 代理必须遵守协议 UIViewControllerTransitioningDelegate
+        photoBrowser.modalPresentationStyle = .Custom
+        photoBrowser.transitioningDelegate = photoBrowserAnimator
+        // 前面已经定义为属性, 通过懒加载来强引用执行动画的代理
+
+        // 4.弹出控制器
+        // 做下面跳转的时候会调用代理方法
         presentViewController(photoBrowser, animated: true, completion: nil)
     }
 }
+
 
 
 
