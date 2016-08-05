@@ -38,7 +38,7 @@ class CDH_PhotoBrowserCell: UICollectionViewCell {
             // 5.下载大图并设置到 ImageView 中
             imageView.sd_setImageWithURL(url, placeholderImage: image) { (image, _, _, _) in
                 // 加载图片完成之后重新计算 imageView 的 frame
-                self.imageView.frame = self.caculationImageViewFame(image)
+                self.imageView.frame = caculationImageViewFame(image)
             }
         }
     }
@@ -56,14 +56,4 @@ class CDH_PhotoBrowserCell: UICollectionViewCell {
     }
 }
 
-// MARK : - 根据图片计算imageView的frame
-extension CDH_PhotoBrowserCell{
-    func caculationImageViewFame(image : UIImage) -> CGRect {
-        
-        let imageViewW = UIScreen.mainScreen().bounds.width
-        let imageViewH = imageViewW * image.size.height / image.size.width
-        
-        let imageViewY = (UIScreen.mainScreen().bounds.height - imageViewH) * 0.5
-        return CGRect(x: 0, y: imageViewY, width: imageViewW, height: imageViewH)
-    }
-}
+

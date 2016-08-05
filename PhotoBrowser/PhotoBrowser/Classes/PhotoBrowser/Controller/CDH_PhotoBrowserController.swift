@@ -156,7 +156,27 @@ extension CDH_PhotoBrowserController{
     
 }
 
-
+extension CDH_PhotoBrowserController : CDH_DismissCustomAnimatorProtocol{
+    func getImageView() -> UIImageView {
+        
+        // 1.创建一个 UIImageView 对象
+        let imageView = UIImageView()
+        
+        // 2.设置 imageView 中的 image
+        let cell = collectionView.visibleCells().first as! CDH_PhotoBrowserCell
+        imageView.image = cell.imageView.image
+        
+        // 3.设置 imageView 的 frame
+        imageView.frame = cell.imageView.frame
+        
+        return imageView
+    }
+    func getIndexPath() -> NSIndexPath {
+        // 1.获取到正在显示的 cell
+        let cell = collectionView.visibleCells().first as! CDH_PhotoBrowserCell
+        return collectionView.indexPathForCell(cell)!
+    }
+}
 
 
 

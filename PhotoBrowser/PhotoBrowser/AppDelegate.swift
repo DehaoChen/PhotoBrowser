@@ -44,3 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+// MARK : - 根据图片计算imageView的frame
+func caculationImageViewFame(image : UIImage) -> CGRect {
+    
+    let imageViewW = UIScreen.mainScreen().bounds.width
+    let imageViewH = imageViewW * image.size.height / image.size.width
+    
+    let imageViewY = (UIScreen.mainScreen().bounds.height - imageViewH) * 0.5
+    return CGRect(x: 0, y: imageViewY, width: imageViewW, height: imageViewH)
+}

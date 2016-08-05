@@ -14,7 +14,8 @@ class CDH_HomeViewController: UICollectionViewController {
 
     // Mark:- 定义属性
     var isPresented : Bool = false
-    lazy var photoBrowserAnimator : CDH_PhotoBrowserAnimator = CDH_PhotoBrowserAnimator()
+//    lazy var photoBrowserAnimator : CDH_PhotoBrowserAnimator = CDH_PhotoBrowserAnimator()
+    lazy var photoBrowserAnimator : CDH_PresentedCustomAnimator = CDH_PresentedCustomAnimator()
     lazy var shops : [CDH_ShopItem] = [CDH_ShopItem]()
     
     
@@ -117,12 +118,59 @@ extension CDH_HomeViewController{
         // 所以我们必须在这里设置为自定义转场动画, 保留原来控制器 View 的视图在窗口中不被移除
         // 并给转场动画设置代理, 代理必须遵守协议 UIViewControllerTransitioningDelegate
         photoBrowser.modalPresentationStyle = .Custom
-        photoBrowser.transitioningDelegate = photoBrowserAnimator
         // 前面已经定义为属性, 通过懒加载来强引用执行动画的代理
+        photoBrowser.transitioningDelegate = photoBrowserAnimator
+        photoBrowserAnimator.indexPath = indexPath
+        photoBrowserAnimator.presentedDelegate = self
+        photoBrowserAnimator.dismissDelegate = photoBrowser
 
         // 4.弹出控制器
         // 做下面跳转的时候会调用代理方法
         presentViewController(photoBrowser, animated: true, completion: nil)
+    }
+}
+
+// MARK : - 实现 PresentedCustomAnimatorProtocol 代理方法
+extension CDH_HomeViewController : CDH_PresentedCustomAnimatorProtocol{
+    func getImageView(indexPath : NSIndexPath) -> UIImageView{
+        
+        // 1.创建一个 UIImageView 的对象
+        let imageView = UIImageView()
+        
+        // 2.设置图片
+        let cell = collectionView?.cellForItemAtIndexPath(indexPath) as! CDH_HomeCollectionViewCell
+        imageView.image = cell.imageView.image
+        
+        // 3.配置图片的填充模式
+        imageView.contentMode = .ScaleAspectFill
+        imageView.clipsToBounds = true
+        
+        // 4.返回用于做动画的 UIImageView
+        return imageView
+    }
+    func getStartRect(indexPath : NSIndexPath) -> CGRect{
+        
+        // 获取不到对应 cell 的 frame 值则直接 设置为 CGRectZero
+        guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CDH_HomeCollectionViewCell else{
+            return CGRectZero
+        }
+        
+        // 2.将 cell 的 frame 转化为所有的屏幕的 frame 
+        let startRect = collectionView!.convertRect(cell.frame, toCoordinateSpace: UIApplication.sharedApplication().keyWindow!)
+        
+        // 3.返回执行跳转起始位置
+        return startRect
+    }
+    func getEndRect(indexPath : NSIndexPath) -> CGRect{
+        
+        // 1.获取当前正在显示的 cell
+        let cell = collectionView?.cellForItemAtIndexPath(indexPath) as! CDH_HomeCollectionViewCell
+        
+        // 2.获取到 image 对象
+        let image = cell.imageView.image
+        
+        // 3.计算图片的 Frame 调用全局函数
+        return caculationImageViewFame(image!)
     }
 }
 
